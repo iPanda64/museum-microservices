@@ -1,0 +1,40 @@
+# ======================
+# General
+# ======================
+.DS_Store
+Thumbs.db
+*.swp
+
+# ======================
+# Environment variables
+# ======================
+.env
+.env.local
+.env.*.local
+
+# ======================
+# Logs
+# ======================
+*.log
+logs/
+
+# ======================
+# IDEs
+# ======================
+.vscode/
+.idea/
+*.iml
+
+# ======================
+# Frontend
+# ======================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ======================
+# Backend
+# ======================
+backend/target/
+backend/*.log
+backend/.mvn/wrapper/maven-wrapper.jar
