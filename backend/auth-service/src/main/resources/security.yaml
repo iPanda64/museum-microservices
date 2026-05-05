@@ -1,0 +1,7 @@
+jwt:
+  secret: "JWT_KEY_HERE"
+  expiration-ms: 3600000
+
+security:
+  public-endpoints:
+    - "/api/credentials/login"

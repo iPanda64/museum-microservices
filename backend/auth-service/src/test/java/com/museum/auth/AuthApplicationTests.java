@@ -1,10 +1,10 @@
-package com.museum.backend;
+package com.museum.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class AuthApplicationTests {
 
 	@Test
 	void contextLoads() {
