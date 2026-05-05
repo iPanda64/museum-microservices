@@ -1,8 +1,8 @@
 package com.museum.auth.domain.daocontracts;
 
-import com.museum.auth.domain.models.Credentials;
-import com.museum.auth.domain.models.UserId;
-import com.museum.auth.domain.models.Username;
+import com.museum.auth.domain.aggregate.Credentials;
+import com.museum.auth.domain.aggregate.UserId;
+import com.museum.auth.domain.aggregate.Username;
 
 import java.util.List;
 import java.util.Optional;

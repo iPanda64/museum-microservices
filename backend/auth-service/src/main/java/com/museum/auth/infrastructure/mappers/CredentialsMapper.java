@@ -1,8 +1,8 @@
 package com.museum.auth.infrastructure.mappers;
 
-import com.museum.auth.domain.models.Credentials;
-import com.museum.auth.domain.models.UserId;
-import com.museum.auth.domain.models.Username;
+import com.museum.auth.domain.aggregate.Credentials;
+import com.museum.auth.domain.aggregate.UserId;
+import com.museum.auth.domain.aggregate.Username;
 import com.museum.auth.infrastructure.entities.CredentialsEntity;
 import com.museum.auth.infrastructure.entities.RoleEntity;
 import org.springframework.stereotype.Component;

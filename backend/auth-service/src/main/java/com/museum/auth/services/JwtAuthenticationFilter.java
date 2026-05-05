@@ -1,7 +1,7 @@
 package com.museum.auth.services;
 
-import com.museum.auth.domain.models.RoleName;
-import com.museum.auth.domain.models.UserId;
+import com.museum.auth.domain.aggregate.RoleName;
+import com.museum.auth.domain.aggregate.UserId;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

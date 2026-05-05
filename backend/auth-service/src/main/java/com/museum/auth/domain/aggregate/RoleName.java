@@ -1,4 +1,4 @@
-package com.museum.auth.domain.models;
+package com.museum.auth.domain.aggregate;
 
 import java.util.Arrays;
 

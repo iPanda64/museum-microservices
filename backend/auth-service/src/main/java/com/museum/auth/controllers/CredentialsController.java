@@ -4,7 +4,8 @@ import com.museum.auth.controllers.mappers.CredentialsControllerMapper;
 import com.museum.auth.domain.dtos.CredentialsRequestDto;
 import com.museum.auth.domain.dtos.CredentialsResponseDto;
 import com.museum.auth.domain.dtos.LoginRequestDto;
-import com.museum.auth.domain.models.Credentials;
+import com.museum.auth.domain.aggregate.Credentials;
+import com.museum.auth.domain.aggregate.NullCredentials;
 import com.museum.auth.services.CredentialsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -53,8 +54,8 @@ public class CredentialsController {
     public ResponseEntity<CredentialsResponseDto> updateCredentials(
             @PathVariable Integer userId,
             @RequestBody CredentialsRequestDto dto) {
-        Credentials domain = credentialsControllerMapper.toDomain(dto);
-        Credentials updated = credentialsService.updateCredentials(userId, domain);
+        NullCredentials nullDomain = credentialsControllerMapper.toNullDomain(dto);
+        Credentials updated = credentialsService.updateCredentials(userId, nullDomain);
         return ResponseEntity.ok(credentialsControllerMapper.toResponseDto(updated));
     }
 

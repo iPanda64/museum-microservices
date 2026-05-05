@@ -1,9 +1,9 @@
 package com.museum.auth.infrastructure.dao;
 
 import com.museum.auth.domain.daocontracts.CredentialsDAO;
-import com.museum.auth.domain.models.Credentials;
-import com.museum.auth.domain.models.UserId;
-import com.museum.auth.domain.models.Username;
+import com.museum.auth.domain.aggregate.Credentials;
+import com.museum.auth.domain.aggregate.UserId;
+import com.museum.auth.domain.aggregate.Username;
 import com.museum.auth.infrastructure.entities.CredentialsEntity;
 import com.museum.auth.infrastructure.mappers.CredentialsMapper;
 import jakarta.persistence.EntityManager;
