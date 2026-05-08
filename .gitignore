@@ -38,3 +38,7 @@ frontend/.vite/
 backend/target/
 backend/*.log
 backend/.mvn/wrapper/maven-wrapper.jar
+backend/infra/minio/data/.minio.sys/
+backend/**/bin/
+backend/**/out/
+backend/**/*.db-journal
