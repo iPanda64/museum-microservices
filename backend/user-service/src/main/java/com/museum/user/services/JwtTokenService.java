@@ -1,7 +1,7 @@
-package com.museum.auth.services;
+package com.museum.user.services;
 
-import com.museum.auth.domain.aggregate.RoleName;
-import com.museum.auth.domain.aggregate.UserId;
+import com.museum.user.domain.aggregate.RoleName;
+import com.museum.user.domain.aggregate.UserId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -18,21 +18,8 @@ public class JwtTokenService {
     @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${jwt.expiration-ms}")
-    private long jwtExpirationMs;
-
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-    }
-
-    public String generateToken(UserId userId, String roleName) {
-        return Jwts.builder()
-                .subject(userId.value().toString())
-                .claim("role", "ROLE_" + roleName)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                .signWith(getSigningKey())
-                .compact();
     }
 
     public RoleName extractRoleName(String token) {

@@ -1,5 +1,5 @@
 jwt:
-  secret: "JWT_KEY_HERE"
+  secret: "THIS_IS_A_SECRET_KEY_WITH_AT_LEAST_32_CHARACTERS"
   expiration-ms: 3600000
 
 security:

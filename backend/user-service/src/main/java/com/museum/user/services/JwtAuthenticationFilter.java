@@ -1,7 +1,7 @@
-package com.museum.auth.services;
+package com.museum.user.services;
 
-import com.museum.auth.domain.aggregate.RoleName;
-import com.museum.auth.domain.aggregate.UserId;
+import com.museum.user.domain.aggregate.RoleName;
+import com.museum.user.domain.aggregate.UserId;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,10 +19,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Collections;
 
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenService jwtTokenService;
+
+    public JwtAuthenticationFilter(JwtTokenService jwtTokenService) {
+        this.jwtTokenService = jwtTokenService;
+    }
 
     @Override
     protected void doFilterInternal(
