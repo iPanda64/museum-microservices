@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: api-gateway
+  
+  codec:
+    max-in-memory-size: 10MB
 
   cloud:
     gateway:
@@ -17,6 +20,11 @@ spring:
           uri: http://user-service:8080
           predicates:
             - Path=/api/users/**
+
+        - id: artist-service
+          uri: http://artist-service:8080
+          predicates:
+            - Path=/api/artists/**
 
         - id: art-storage
           uri: http://minio:9000
