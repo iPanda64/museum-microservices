@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: art
+
+  config:
+    import: optional:classpath:security.yaml
+
+  datasource:
+    url: jdbc:sqlite:museum_art.db
+    driver-class-name: org.sqlite.JDBC
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+minio:
+  url: ${MINIO_URL:http://minio:9000}
+  access-key: ${MINIO_ACCESS_KEY:admin}
+  secret-key: ${MINIO_SECRET_KEY:password123}
+  bucket-name: art-bucket

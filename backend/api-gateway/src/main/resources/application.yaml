@@ -19,12 +19,17 @@ spring:
         - id: user-service
           uri: http://user-service:8080
           predicates:
-            - Path=/api/users/**
+            - Path=/api/users/**, /api/users
 
         - id: artist-service
           uri: http://artist-service:8080
           predicates:
-            - Path=/api/artists/**
+            - Path=/api/artists/**, /api/artists
+
+        - id: art-service
+          uri: http://art-service:8080
+          predicates:
+            - Path=/api/art/**, /api/art
 
         - id: art-storage
           uri: http://minio:9000

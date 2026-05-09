@@ -59,6 +59,21 @@ services:
       - minio
       - auth-service
 
+  art-service:
+    build:
+      context: ./art-service
+      dockerfile: Dockerfile
+    container_name: museum-art
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./art-service/museum_art.db:/app/museum_art.db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - minio
+      - auth-service
+
   # Placeholders for future services
   # art-service:
   #   build: ./art-service
