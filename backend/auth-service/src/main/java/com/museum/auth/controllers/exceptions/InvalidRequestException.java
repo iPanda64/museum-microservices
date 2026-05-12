@@ -1,4 +1,4 @@
-package com.museum.user.services;
+package com.museum.auth.controllers.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

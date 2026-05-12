@@ -1,4 +1,4 @@
-package com.museum.artist.services;
+package com.museum.artist.controllers.exceptions;
 
 public class InvalidRequestException extends RuntimeException {
     public InvalidRequestException(String message) {

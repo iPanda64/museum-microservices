@@ -3,7 +3,7 @@ package com.museum.auth.controllers.mappers;
 import com.museum.auth.domain.dtos.CredentialsRequestDto;
 import com.museum.auth.domain.dtos.CredentialsResponseDto;
 import com.museum.auth.domain.aggregate.*;
-import com.museum.auth.services.InvalidRequestException; // NEW IMPORT
+import com.museum.auth.controllers.exceptions.InvalidRequestException; // NEW IMPORT
 import org.springframework.stereotype.Component;
 
 @Component

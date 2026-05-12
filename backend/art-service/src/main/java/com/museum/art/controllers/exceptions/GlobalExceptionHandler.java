@@ -1,4 +1,4 @@
-package com.museum.artist.services;
+package com.museum.art.controllers.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

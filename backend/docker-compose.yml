@@ -74,6 +74,18 @@ services:
       - minio
       - auth-service
 
+  export-service:
+    build:
+      context: ./export-service
+      dockerfile: Dockerfile
+    container_name: museum-export
+    ports:
+      - "8084:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - auth-service
+
   # Placeholders for future services
   # art-service:
   #   build: ./art-service
