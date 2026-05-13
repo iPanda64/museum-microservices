@@ -36,6 +36,11 @@ spring:
           predicates:
             - Path=/api/export/**, /api/export
 
+        - id: statistics-service
+          uri: http://statistics-service:8080
+          predicates:
+            - Path=/api/statistics/**, /api/statistics
+
         - id: art-storage
           uri: http://minio:9000
           predicates:
