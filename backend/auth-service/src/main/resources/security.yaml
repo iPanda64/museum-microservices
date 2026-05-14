@@ -1,3 +1,8 @@
 jwt:
-  secret: "THIS_IS_A_SECRET_KEY_WITH_AT_LEAST_32_CHARACTERS"
+  secret: ${JWT_SECRET}
   expiration-ms: 3600000
+
+telegram:
+  bot:
+    name: ${TELEGRAM_BOT_NAME:MuseumMicroservice_bot}
+    token: ${TELEGRAM_BOT_TOKEN}

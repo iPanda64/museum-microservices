@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: notification
+
+  config:
+    import: optional:classpath:security.yaml
+
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${mail.credentials.username}
+    password: ${mail.credentials.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

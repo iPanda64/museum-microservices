@@ -17,7 +17,8 @@ public class CredentialsMapper {
                 new UserId(entity.getUserId()),
                 new Username(entity.getUsername()),
                 entity.getPasswordHash(),
-                entity.getRole() != null ? entity.getRole().getId() : null
+                entity.getRole() != null ? entity.getRole().getId() : null,
+                entity.getTelegramChatId()
         );
     }
     public CredentialsEntity toEntity(Credentials domain) {
@@ -27,6 +28,7 @@ public class CredentialsMapper {
                 domain.userId() != null ? domain.userId().value() : null,
                 domain.username() != null ? domain.username().value() : null,
                 domain.passwordHash(),
+                domain.telegramChatId(),
                 domain.roleId() != null ? new RoleEntity(domain.roleId(), null) : null
         );
     }

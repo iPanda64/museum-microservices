@@ -4,7 +4,8 @@ public record Credentials(
         UserId userId,
         Username username,
         String passwordHash,
-        Integer roleId
+        Integer roleId,
+        Long telegramChatId
 ) {
     public Credentials {
 
@@ -23,10 +24,18 @@ public record Credentials(
     }
 
     public Credentials changeUsername(Username newUsername) {
-        return new Credentials(this.userId, newUsername, this.passwordHash, this.roleId);
+        return new Credentials(this.userId, newUsername, this.passwordHash, this.roleId, this.telegramChatId);
     }
 
     public Credentials changePasswordHash(String newPasswordHash) {
-        return new Credentials(this.userId, this.username, newPasswordHash, this.roleId);
+        return new Credentials(this.userId, this.username, newPasswordHash, this.roleId, this.telegramChatId);
+    }
+
+    public Credentials linkTelegram(Long telegramChatId) {
+        return new Credentials(this.userId, this.username, this.passwordHash, this.roleId, telegramChatId);
+    }
+
+    public Credentials unlinkTelegram() {
+        return new Credentials(this.userId, this.username, this.passwordHash, this.roleId, null);
     }
 }

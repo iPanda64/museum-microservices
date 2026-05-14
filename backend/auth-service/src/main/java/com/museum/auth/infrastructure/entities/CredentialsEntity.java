@@ -23,6 +23,9 @@ public class CredentialsEntity {
     @Column(name = "passwordHash", nullable = false)
     private String passwordHash;
 
+    @Column(name = "telegram_chat_id")
+    private Long telegramChatId;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;

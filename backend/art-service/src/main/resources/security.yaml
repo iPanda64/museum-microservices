@@ -1,2 +1,2 @@
 jwt:
-  secret: "THIS_IS_A_SECRET_KEY_WITH_AT_LEAST_32_CHARACTERS"
+  secret: ${JWT_SECRET}

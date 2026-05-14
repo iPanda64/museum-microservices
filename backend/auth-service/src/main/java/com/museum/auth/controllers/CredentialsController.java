@@ -66,9 +66,4 @@ public class CredentialsController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequest) {
-        String token = credentialsService.login(loginRequest.username(), loginRequest.password());
-        return ResponseEntity.ok(token);
-    }
 }

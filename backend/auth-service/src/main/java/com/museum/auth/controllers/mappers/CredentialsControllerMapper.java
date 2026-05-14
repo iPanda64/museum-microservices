@@ -25,7 +25,8 @@ public class CredentialsControllerMapper {
                 dto.userId() != null ? new UserId(dto.userId()) : null,
                 dto.username() != null ? new Username(dto.username()) : null,
                 dto.password(), // Mapping raw 'password' from DTO to 'passwordHash' in Domain
-                roleId
+                roleId,
+                null
         );
     }
 

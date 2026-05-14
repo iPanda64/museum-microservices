@@ -22,7 +22,6 @@ spring:
 
 minio:
   url: ${MINIO_URL:http://minio:9000}
-  access-key: ${MINIO_ACCESS_KEY:admin}
-  secret-key: ${MINIO_SECRET_KEY:password123}
+  access-key: ${MINIO_ACCESS_KEY}
+  secret-key: ${MINIO_SECRET_KEY}
   bucket-name: artist-bucket
-

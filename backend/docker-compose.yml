@@ -26,6 +26,10 @@ services:
       - ./auth-service/museum_auth.db:/app/museum_auth.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_BOT_NAME=${TELEGRAM_BOT_NAME}
+      - USER_SERVICE_URL=http://user-service:8080
     depends_on:
       - minio
 
@@ -40,6 +44,7 @@ services:
       - ./user-service/museum_user.db:/app/museum_user.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
     depends_on:
       - minio
       - auth-service
@@ -55,6 +60,9 @@ services:
       - ./artist-service/museum_artist.db:/app/museum_artist.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
     depends_on:
       - minio
       - auth-service
@@ -70,6 +78,9 @@ services:
       - ./art-service/museum_art.db:/app/museum_art.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
     depends_on:
       - minio
       - auth-service
@@ -83,6 +94,24 @@ services:
       - "8084:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - auth-service
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    container_name: museum-notification
+    ports:
+      - "8086:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - TEST_EMAIL_OVERRIDE=${TEST_EMAIL_OVERRIDE}
     depends_on:
       - auth-service
 
@@ -95,12 +124,8 @@ services:
       - "8085:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
     depends_on:
       - auth-service
       - art-service
       - artist-service
-
-  # Placeholders for future services
-  # art-service:
-  #   build: ./art-service
-

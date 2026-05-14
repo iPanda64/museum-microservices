@@ -1,0 +1,15 @@
+jwt:
+  secret: ${JWT_SECRET}
+
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN}
+
+services:
+  auth:
+    url: ${AUTH_SERVICE_URL:http://auth-service:8080}
+
+mail:
+  credentials:
+    username: ${SMTP_USER}
+    password: ${SMTP_PASS}

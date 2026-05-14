@@ -14,3 +14,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+services:
+  notification:
+    url: ${NOTIFICATION_SERVICE_URL:http://notification-service:8080}
+  user:
+    url: ${USER_SERVICE_URL:http://user-service:8080}
