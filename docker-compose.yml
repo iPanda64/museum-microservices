@@ -1,11 +1,11 @@
 include:
-  - infra/minio/docker-compose.yml
+  - backend/infra/minio/docker-compose.yml
 
 services:
   # Entry Point
   api-gateway:
     build:
-      context: ./api-gateway
+      context: ./backend/api-gateway
       dockerfile: Dockerfile
     container_name: museum-gateway
     ports:
@@ -17,13 +17,13 @@ services:
   # Services
   auth-service:
     build:
-      context: ./auth-service
+      context: ./backend/auth-service
       dockerfile: Dockerfile
     container_name: museum-auth
     ports:
       - "8080:8080"
     volumes:
-      - ./auth-service/museum_auth.db:/app/museum_auth.db
+      - ./backend/auth-service/museum_auth.db:/app/museum_auth.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - JWT_SECRET=${JWT_SECRET}
@@ -35,13 +35,13 @@ services:
 
   user-service:
     build:
-      context: ./user-service
+      context: ./backend/user-service
       dockerfile: Dockerfile
     container_name: museum-user
     ports:
       - "8081:8080"
     volumes:
-      - ./user-service/museum_user.db:/app/museum_user.db
+      - ./backend/user-service/museum_user.db:/app/museum_user.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - JWT_SECRET=${JWT_SECRET}
@@ -51,13 +51,13 @@ services:
 
   artist-service:
     build:
-      context: ./artist-service
+      context: ./backend/artist-service
       dockerfile: Dockerfile
     container_name: museum-artist
     ports:
       - "8082:8080"
     volumes:
-      - ./artist-service/museum_artist.db:/app/museum_artist.db
+      - ./backend/artist-service/museum_artist.db:/app/museum_artist.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - JWT_SECRET=${JWT_SECRET}
@@ -69,13 +69,13 @@ services:
 
   art-service:
     build:
-      context: ./art-service
+      context: ./backend/art-service
       dockerfile: Dockerfile
     container_name: museum-art
     ports:
       - "8083:8080"
     volumes:
-      - ./art-service/museum_art.db:/app/museum_art.db
+      - ./backend/art-service/museum_art.db:/app/museum_art.db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - JWT_SECRET=${JWT_SECRET}
@@ -87,7 +87,7 @@ services:
 
   export-service:
     build:
-      context: ./export-service
+      context: ./backend/export-service
       dockerfile: Dockerfile
     container_name: museum-export
     ports:
@@ -100,7 +100,7 @@ services:
 
   notification-service:
     build:
-      context: ./notification-service
+      context: ./backend/notification-service
       dockerfile: Dockerfile
     container_name: museum-notification
     ports:
@@ -117,7 +117,7 @@ services:
 
   statistics-service:
     build:
-      context: ./statistics-service
+      context: ./backend/statistics-service
       dockerfile: Dockerfile
     container_name: museum-statistics
     ports:
@@ -129,3 +129,13 @@ services:
       - auth-service
       - art-service
       - artist-service
+  frontend-app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: museum-frontend
+    ports:
+      - "80:80"               # Accessible at http://localhost
+    depends_on:
+      - auth-service
+      - api-gateway

@@ -14,7 +14,7 @@ spring:
         - id: auth-service
           uri: http://auth-service:8080
           predicates:
-            - Path=/api/credentials/**,/api/login
+            - Path=/api/credentials/**,/api/login,/api/auth/**
 
         - id: user-service
           uri: http://user-service:8080
