@@ -1,6 +1,6 @@
 package com.museum.export.services;
 
-import com.museum.export.domain.contracts.ExportGenerator;
+import com.museum.export.domain.contracts.ExportStrategy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-public class ExportGeneratorFactory {
+public class ExportFactory {
 
-    private final Map<String, ExportGenerator> generatorMap;
+    private final Map<String, ExportStrategy> strategyMap;
 
-    public ExportGeneratorFactory(List<ExportGenerator> generators) {
-        this.generatorMap = generators.stream()
+    public ExportFactory(List<ExportStrategy> strategies) {
+        this.strategyMap =  strategies.stream()
                 .collect(Collectors.toMap(
                         g -> g.getFormat().toUpperCase(),
                         Function.identity()
@@ -22,16 +22,16 @@ public class ExportGeneratorFactory {
     }
 
     public List<String> getRegisteredFormats() {
-        return generatorMap.keySet().stream().toList();
+        return strategyMap.keySet().stream().toList();
     }
 
-    public ExportGenerator getGenerator(String format) {
-        ExportGenerator generator = generatorMap.get(format.toUpperCase());
+    public ExportStrategy getStrategy(String format) {
+        ExportStrategy strategy = strategyMap.get(format.toUpperCase());
 
-        if (generator == null) {
+        if (strategy  == null) {
             throw new IllegalArgumentException("Unsupported export format: " + format);
         }
 
-        return generator;
+        return strategy;
     }
 }

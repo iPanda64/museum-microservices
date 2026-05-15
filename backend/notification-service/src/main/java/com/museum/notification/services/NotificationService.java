@@ -2,6 +2,7 @@ package com.museum.notification.services;
 
 import com.museum.notification.domain.aggregate.NotificationChannel;
 import com.museum.notification.domain.contracts.NotificationSender;
+import com.museum.notification.domain.iterators.SenderIterator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,13 @@ public class NotificationService {
     private final List<NotificationSender> senders;
 
     public void sendNotification(NotificationChannel channel, String target, String message) {
-        senders.stream()
-                .filter(sender -> sender.supports(channel))
-                .findFirst()
-                .ifPresentOrElse(
-                        sender -> sender.send(target, message),
-                        () -> { throw new IllegalArgumentException("Unsupported notification channel: " + channel); }
-                );
+        SenderIterator iterator = new SenderIterator(senders, channel);
+        
+        if (iterator.hasNext()) {
+            NotificationSender sender = iterator.next();
+            sender.send(target, message);
+        } else {
+            throw new IllegalArgumentException("Unsupported notification channel: " + channel);
+        }
     }
 }

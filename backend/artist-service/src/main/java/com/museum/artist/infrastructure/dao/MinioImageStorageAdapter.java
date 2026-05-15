@@ -1,6 +1,6 @@
 package com.museum.artist.infrastructure.dao;
 
-import com.museum.artist.domain.daocontracts.StorageDAO;
+import com.museum.artist.domain.daocontracts.ImageStorage;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.io.InputStream;
 
 @Repository
-public class MinioStorageDAOImpl implements StorageDAO {
+public class MinioImageStorageAdapter implements ImageStorage {
 
     private final MinioClient minioClient;
     private final String bucketName;
 
-    public MinioStorageDAOImpl(
+    public MinioImageStorageAdapter(
             @Value("${minio.url}") String url,
             @Value("${minio.access-key}") String accessKey,
             @Value("${minio.secret-key}") String secretKey,

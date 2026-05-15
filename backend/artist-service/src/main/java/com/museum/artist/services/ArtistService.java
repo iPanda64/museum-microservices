@@ -1,7 +1,7 @@
 package com.museum.artist.services;
 
 import com.museum.artist.domain.daocontracts.ArtistDAO;
-import com.museum.artist.domain.daocontracts.StorageDAO;
+import com.museum.artist.domain.daocontracts.ImageStorage;
 import com.museum.artist.domain.aggregate.Artist;
 import com.museum.artist.domain.aggregate.ArtistId;
 import com.museum.artist.domain.aggregate.NullArtist;
@@ -17,11 +17,11 @@ import java.util.Optional;
 public class ArtistService {
 
     private final ArtistDAO artistDAO;
-    private final StorageDAO storageDAO;
+    private final ImageStorage imageStorage;
 
-    public ArtistService(ArtistDAO artistDAO, StorageDAO storageDAO) {
+    public ArtistService(ArtistDAO artistDAO, ImageStorage imageStorage) {
         this.artistDAO = artistDAO;
-        this.storageDAO = storageDAO;
+        this.imageStorage = imageStorage;
     }
 
     public List<Artist> getAllArtists() {
@@ -46,7 +46,7 @@ public class ArtistService {
     public void deleteArtist(Integer id) {
         Artist artist = artistDAO.findById(new ArtistId(id)).orElse(null);
         if (artist != null && artist.profilePhotoPath() != null) {
-            storageDAO.deleteFile(artist.profilePhotoPath());
+            imageStorage.deleteFile(artist.profilePhotoPath());
         }
         artistDAO.deleteById(new ArtistId(id));
     }
@@ -57,13 +57,13 @@ public class ArtistService {
 
         if (artist.profilePhotoPath() != null) {
             try {
-                storageDAO.deleteFile(artist.profilePhotoPath());
+                imageStorage.deleteFile(artist.profilePhotoPath());
             } catch (Exception e) {
             }
         }
 
         String fileName = "artist-" + artistId + "-" + originalFilename;
-        String storedPath = storageDAO.uploadFile(fileName, inputStream, contentType);
+        String storedPath = imageStorage.uploadFile(fileName, inputStream, contentType);
 
         Artist updatedArtist = new Artist(
                 artist.artistId(),
@@ -84,7 +84,7 @@ public class ArtistService {
                 .orElseThrow(() -> new IllegalArgumentException("Artist not found"));
 
         if (artist.profilePhotoPath() != null) {
-            storageDAO.deleteFile(artist.profilePhotoPath());
+            imageStorage.deleteFile(artist.profilePhotoPath());
             
             Artist updatedArtist = new Artist(
                     artist.artistId(),

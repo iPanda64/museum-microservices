@@ -1,7 +1,7 @@
 package com.museum.art.services;
 
 import com.museum.art.domain.daocontracts.ArtworkDAO;
-import com.museum.art.domain.daocontracts.StorageDAO;
+import com.museum.art.domain.daocontracts.ImageStorage;
 import com.museum.art.domain.aggregate.Artwork;
 import com.museum.art.domain.aggregate.ArtworkId;
 import com.museum.art.domain.aggregate.ArtworkImage;
@@ -19,11 +19,11 @@ import java.util.Optional;
 public class ArtworkService {
 
     private final ArtworkDAO artworkDAO;
-    private final StorageDAO storageDAO;
+    private final ImageStorage imageStorage;
 
-    public ArtworkService(ArtworkDAO artworkDAO, StorageDAO storageDAO) {
+    public ArtworkService(ArtworkDAO artworkDAO, ImageStorage imageStorage) {
         this.artworkDAO = artworkDAO;
-        this.storageDAO = storageDAO;
+        this.imageStorage = imageStorage;
     }
 
     public List<Artwork> getAllArtworks(String sortBy, String order) {
@@ -49,7 +49,7 @@ public class ArtworkService {
         Artwork artwork = artworkDAO.findById(new ArtworkId(id)).orElse(null);
         if (artwork != null && artwork.images() != null) {
             for (ArtworkImage image : artwork.images()) {
-                storageDAO.deleteFile(image.imagePath());
+                imageStorage.deleteFile(image.imagePath());
             }
         }
         artworkDAO.deleteById(new ArtworkId(id));
@@ -64,7 +64,7 @@ public class ArtworkService {
         }
 
         String fileName = "art-" + artworkId + "-" + System.currentTimeMillis() + "-" + originalFilename;
-        String storedPath = storageDAO.uploadFile(fileName, inputStream, contentType);
+        String storedPath = imageStorage.uploadFile(fileName, inputStream, contentType);
 
         List<ArtworkImage> updatedImages = new ArrayList<>(artwork.images());
         updatedImages.add(new ArtworkImage(null, storedPath));
@@ -90,7 +90,7 @@ public class ArtworkService {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Image not found in this artwork"));
 
-        storageDAO.deleteFile(imageToDelete.imagePath());
+        imageStorage.deleteFile(imageToDelete.imagePath());
 
         List<ArtworkImage> updatedImages = artwork.images().stream()
                 .filter(img -> !img.imageId().equals(imageId))

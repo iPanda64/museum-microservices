@@ -2,13 +2,13 @@ package com.museum.export.infrastructure;
 
 import com.museum.export.domain.aggregate.Artwork;
 import com.museum.export.domain.aggregate.ArtworkImage;
-import com.museum.export.domain.contracts.ExportGenerator;
+import com.museum.export.domain.contracts.ExportStrategy;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CsvExportGenerator implements ExportGenerator {
+public class CsvExportStrategy implements ExportStrategy {
     @Override
     public String getFormat() { return "CSV"; }
 

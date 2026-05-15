@@ -4,16 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.museum.export.domain.aggregate.Artwork;
-import com.museum.export.domain.contracts.ExportGenerator;
+import com.museum.export.domain.contracts.ExportStrategy;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JsonExportGenerator implements ExportGenerator {
+public class JsonExportStrategy implements ExportStrategy {
 
     private final ObjectMapper objectMapper;
 
-    public JsonExportGenerator() {
+    public JsonExportStrategy() {
         this.objectMapper = new ObjectMapper();
         this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         // Register modules if needed, but for simple POJOs/Records it works out of the box
