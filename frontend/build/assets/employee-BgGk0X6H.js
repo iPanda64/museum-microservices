@@ -1,1 +1,0 @@
-import{i as e,n as t,r as n,t as r}from"./jsx-runtime-0Tqpd_9F.js";var i=e(n(),1),a=e(t(),1),o=r();function s(){return(0,o.jsxs)(`div`,{children:[(0,o.jsx)(`h1`,{children:`Employee Portal`}),(0,o.jsx)(`p`,{children:`Welcome to the employee workspace.`})]})}a.createRoot(document.getElementById(`root`)).render((0,o.jsx)(i.StrictMode,{children:(0,o.jsx)(s,{})}));

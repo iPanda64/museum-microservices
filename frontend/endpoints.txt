@@ -1,0 +1,365 @@
+Museum App API Endpoints Documentation
+
+================================================================================
+ART SERVICE (/api/art)
+================================================================================
+
+GET /api/art
+Description: Get all artworks.
+Roles: Any
+Response:
+[
+  {
+    "artworkId": 1,
+    "artistId": 10,
+    "title": "Mona Lisa",
+    "artworkType": "Painting",
+    "images": [
+      {
+        "imageId": 1,
+        "path": "/media/art/..."
+      }
+    ]
+  }
+]
+
+GET /api/art/{artworkId}
+Description: Get artwork by ID.
+Roles: Any
+Response:
+{
+  "artworkId": 1,
+  "artistId": 10,
+  "title": "Mona Lisa",
+  "artworkType": "Painting",
+  "images": [...]
+}
+
+GET /api/art/search?title={title}
+Description: Search artworks by title.
+Roles: Any
+Response: List of ArtworkResponseDto (same as GET /api/art)
+
+POST /api/art
+Description: Create artwork.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Request Body:
+{
+  "artistId": 10,
+  "title": "Starry Night",
+  "artworkType": "Painting"
+}
+Response Body:
+{
+  "artworkId": 2,
+  "artistId": 10,
+  "title": "Starry Night",
+  "artworkType": "Painting",
+  "images": []
+}
+
+PUT /api/art/{artworkId}
+Description: Update artwork.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Request Body:
+{
+  "artistId": 10,
+  "title": "Updated Title",
+  "artworkType": "Painting"
+}
+Response Body: Same as POST /api/art
+
+DELETE /api/art/{artworkId}
+Description: Delete artwork.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Response: 204 No Content
+
+POST /api/art/{artworkId}/photo
+Description: Upload photo for artwork.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Headers: X-File-Name (optional), Content-Type
+Request Body: Binary data
+Response: "/media/art/..." (String path)
+
+DELETE /api/art/{artworkId}/photo/{imageId}
+Description: Delete photo.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Response: 204 No Content
+
+GET /media/art/{fileName}
+Description: Publicly retrieve artwork image from storage.
+Roles: Any
+Response: Image binary data
+
+
+================================================================================
+ARTIST SERVICE (/api/artists)
+================================================================================
+
+GET /api/artists
+Description: Get all artists.
+Roles: Any
+Response:
+[
+  {
+    "artistId": 10,
+    "fullName": "Leonardo da Vinci",
+    "birthDate": "1452-04-15",
+    "birthPlace": "Vinci",
+    "nationality": "Italian",
+    "biography": "...",
+    "profilePhotoPath": "/media/artist/..."
+  }
+]
+
+GET /api/artists/{artistId}
+Description: Get artist by ID.
+Roles: Any
+Response: ArtistResponseDto (same as above)
+
+GET /api/artists/search?name={name}
+Description: Search artists by name.
+Roles: Any
+Response: List of ArtistResponseDto
+
+POST /api/artists
+Description: Create artist.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Request Body:
+{
+  "fullName": "Vincent van Gogh",
+  "birthDate": "1853-03-30",
+  "birthPlace": "Groot Zundert",
+  "nationality": "Dutch",
+  "biography": "...",
+  "profilePhotoPath": null
+}
+Response Body: Same as GET artist with artistId
+
+PUT /api/artists/{artistId}
+Description: Update artist.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Request Body: ArtistRequestDto
+Response Body: ArtistResponseDto
+
+DELETE /api/artists/{artistId}
+Description: Delete artist.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Response: 204 No Content
+
+POST /api/artists/{artistId}/photo
+Description: Upload profile photo.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Headers: X-File-Name (optional), Content-Type
+Request Body: Binary data
+Response: "/media/artist/..." (String path)
+
+DELETE /api/artists/{artistId}/photo
+Description: Delete profile photo.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Response: 204 No Content
+
+GET /media/artist/{fileName}
+Description: Publicly retrieve artist profile photo from storage.
+Roles: Any
+Response: Image binary data
+
+
+================================================================================
+AUTH SERVICE (/api/auth, /api/login, /api/credentials)
+================================================================================
+
+POST /api/login
+Description: Login and receive JWT token.
+Roles: Any
+Request Body:
+{
+  "username": "admin",
+  "password": "password"
+}
+Response: "eyJhbGciOiJIUzI1NiJ..." (JWT Token String)
+
+GET /api/auth/verify-admin
+Description: Verify if user is ADMIN.
+Roles: hasRole('ADMIN')
+Response: 200 OK
+
+GET /api/auth/verify-manager
+Description: Verify if user is ADMIN or MANAGER.
+Roles: hasRole('ADMIN') || hasRole('MANAGER')
+Response: 200 OK
+
+GET /api/auth/verify-employee
+Description: Verify if user is ADMIN, MANAGER or EMPLOYEE.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Response: 200 OK
+
+GET /api/credentials
+Description: Get all credentials.
+Roles: hasRole('ADMIN')
+Response:
+[
+  {
+    "userId": 1,
+    "username": "admin",
+    "roleName": "ADMIN"
+  }
+]
+
+GET /api/credentials/{userId}
+Description: Get credentials for a specific user.
+Roles: hasRole('ADMIN')
+Response: CredentialsResponseDto
+
+POST /api/credentials
+Description: Create credentials for a user.
+Roles: hasRole('ADMIN')
+Request Body:
+{
+  "userId": 1,
+  "username": "user1",
+  "password": "password123",
+  "roleName": "EMPLOYEE"
+}
+Response: CredentialsResponseDto
+
+PUT /api/credentials/{userId}
+Description: Update credentials.
+Roles: hasRole('ADMIN')
+Request Body: CredentialsRequestDto
+Response: CredentialsResponseDto
+
+DELETE /api/credentials/{userId}
+Description: Delete credentials.
+Roles: hasRole('ADMIN')
+Response: 204 No Content
+
+GET /api/credentials/telegram/link/{id}
+Description: Get Telegram bot linking URL.
+Roles: hasRole('ADMIN')
+Response:
+{
+  "url": "https://t.me/your_bot?start=..."
+}
+
+GET /api/credentials/telegram/{id}
+Description: Check if user linked Telegram.
+Roles: hasRole('ADMIN')
+Response:
+{
+  "linked": true
+}
+
+GET /api/credentials/telegram/chat-id/{id}
+Description: Get Telegram chat ID for user.
+Roles: hasRole('ADMIN')
+Response: 123456789 (Long)
+
+DELETE /api/credentials/telegram/{id}
+Description: Unlink Telegram.
+Roles: hasRole('ADMIN')
+Response: 204 No Content
+
+
+================================================================================
+EXPORT SERVICE (/api/export)
+================================================================================
+
+POST /api/export
+Description: Export all artworks in specified format.
+Roles: hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')
+Request Body:
+{
+  "format": "JSON"
+}
+Response: Binary file (attachment)
+
+GET /api/export
+Description: Get available export formats (e.g., JSON, XML, CSV).
+Roles: Any
+Response: ["JSON", "XML", "CSV"]
+
+
+================================================================================
+NOTIFICATION SERVICE (/api/notification)
+================================================================================
+
+PUT /api/notification/telegram/{target}
+Description: Send notification via Telegram.
+Roles: hasRole('ADMIN')
+Request Body:
+{
+  "message": "Hello from Museum!"
+}
+Response: 200 OK
+
+PUT /api/notification/email/{email}
+Description: Send notification via Email.
+Roles: hasRole('ADMIN')
+Request Body:
+{
+  "message": "Hello from Museum!"
+}
+Response: 200 OK
+
+
+================================================================================
+STATISTICS SERVICE (/api/statistics)
+================================================================================
+
+GET /api/statistics
+Description: Get list of available statistic types.
+Roles: hasRole('ADMIN') || hasRole('MANAGER')
+Response: ["ARTWORKS_BY_TYPE", "ARTISTS_BY_NATIONALITY"]
+
+GET /api/statistics/{type}
+Description: Get statistics data for specified type.
+Roles: hasRole('ADMIN') || hasRole('MANAGER')
+Response:
+{
+  "Painting": 15,
+  "Sculpture": 5
+}
+
+
+================================================================================
+USER SERVICE (/api/users)
+================================================================================
+
+GET /api/users
+Description: Get all users profiles.
+Roles: hasRole('ADMIN')
+Response:
+[
+  {
+    "userId": 1,
+    "email": "admin@museum.com",
+    "phoneNumber": "+1234567890"
+  }
+]
+
+GET /api/users/{userId}
+Description: Get user profile by ID.
+Roles: hasRole('ADMIN')
+Response: UserResponseDto
+
+POST /api/users/{userId}
+Description: Create user profile.
+Roles: hasRole('ADMIN')
+Request Body:
+{
+  "email": "newuser@museum.com",
+  "phoneNumber": "+0987654321"
+}
+Response: UserResponseDto
+
+PUT /api/users/{userId}
+Description: Update user profile.
+Roles: hasRole('ADMIN')
+Request Body: UserRequestDto
+Response: UserResponseDto
+
+DELETE /api/users/{userId}
+Description: Delete user profile.
+Roles: hasRole('ADMIN')
+Response: 204 No Content

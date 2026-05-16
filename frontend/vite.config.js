@@ -12,6 +12,7 @@ export default defineConfig({
         admin: resolve(__dirname, 'admin.html'),
         employee: resolve(__dirname, 'employee.html'),
         manager: resolve(__dirname, 'manager.html'),
+        login: resolve(__dirname, 'login.html'),
       },
     },
   },
