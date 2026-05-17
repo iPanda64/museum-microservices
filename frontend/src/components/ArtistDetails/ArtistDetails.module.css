@@ -1,0 +1,73 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.nameInput {
+  color: var(--text-main);
+  font-weight: bold;
+}
+
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.field {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.field strong {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  min-width: 100px;
+}
+
+.bioSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bioSection strong {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.bioText {
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+.bioTextarea {
+  width: 100%;
+  min-height: 150px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-main);
+  color: var(--text-body);
+  border-radius: 4px;
+  padding: 0.8rem;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  resize: vertical;
+}
+
+.bioTextarea:focus {
+  border-color: var(--action-primary);
+}
+
+.saveContainer {
+  margin-top: 1rem;
+}
+
+.error {
+  color: var(--status-error-text);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}

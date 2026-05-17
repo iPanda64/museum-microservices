@@ -9,7 +9,8 @@ const AuthorizedInput = ({
   className = '', 
   placeholder = '',
   tag: Tag = 'div',
-  fontSize // Add fontSize prop
+  fontSize,
+  type = 'text'
 }) => {
   const isAuthorized = requiredRoles.some(role => hasRole(role));
   const style = fontSize ? { fontSize } : {};
@@ -27,6 +28,7 @@ const AuthorizedInput = ({
 
   return (
     <input 
+      type={type}
       className={`${styles.input} ${styles.editable} ${className}`}
       value={value}
       onChange={(e) => onChange(e.target.value)}

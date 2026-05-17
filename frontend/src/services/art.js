@@ -23,28 +23,6 @@ export const getArtworkById = async (id) => {
   }
 };
 
-export const getArtists = async () => {
-  try {
-    const response = await fetch('/api/artists');
-    if (!response.ok) throw new Error('Failed to fetch artists');
-    return await response.json();
-  } catch (error) {
-    console.error('Error in getArtists:', error);
-    return [];
-  }
-};
-
-export const getArtistById = async (id) => {
-  try {
-    const response = await fetch(`/api/artists/${id}`);
-    if (!response.ok) throw new Error('Failed to fetch artist');
-    return await response.json();
-  } catch (error) {
-    console.error('Error in getArtistById:', error);
-    return null;
-  }
-};
-
 export const uploadArtworkPhoto = async (artworkId, file) => {
   const token = sessionStorage.getItem('museum_token');
   const response = await fetch(`/api/art/${artworkId}/photo`, {

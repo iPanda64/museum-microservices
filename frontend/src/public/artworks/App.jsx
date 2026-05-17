@@ -7,7 +7,8 @@ import AddArtworkModal from '../../components/AddArtworkModal/AddArtworkModal';
 import ExportModal from '../../components/ExportModal/ExportModal';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import GenericButton from '../../components/GenericButton/GenericButton';
-import { getArtworks, getArtists } from '../../services/art';
+import { getArtworks } from '../../services/art';
+import { getArtists } from '../../services/artist';
 import { hasRole } from '../../utils/auth';
 import styles from './Artworks.module.css';
 
@@ -52,9 +53,13 @@ function ArtworksContent() {
     setArtworks(prev => prev.filter(art => art.artworkId !== artworkId));
   };
 
+  const handleUpdateArtwork = (updatedArt) => {
+    setArtworks(prev => prev.map(art => art.artworkId === updatedArt.artworkId ? updatedArt : art));
+  };
+
   // Get unique types from artworks
   const typeOptions = [...new Set(artworks.map(art => art.artworkType))].filter(Boolean).sort();
-  
+
   // Prepare artist options for dropdown
   const artistOptions = artists.map(a => ({ id: a.artistId, name: a.fullName }));
 
@@ -81,11 +86,11 @@ function ArtworksContent() {
       <Navbar />
       <main className={styles.main}>
         <div className={styles.hero}>
-          <h1>Our Collection</h1>
-          <p>Showing every single piece in our collection</p>
+          <h1>The Collection</h1>
+          <p>Showing every single piece in the collection</p>
         </div>
 
-        <SearchBar 
+        <SearchBar
           searchValue={filter}
           onSearchChange={setFilter}
           placeholder="Search by title..."
@@ -111,7 +116,7 @@ function ArtworksContent() {
           )}
         />
 
-        <ArtGrid 
+        <ArtGrid
           data={filteredAndSortedArtworks}
           onArtworkClick={setSelectedArtwork}
           onDeleteArtwork={handleDeleteSuccess}
@@ -119,14 +124,15 @@ function ArtworksContent() {
       </main>
 
       {selectedArtwork && (
-        <ArtModal 
-          artwork={selectedArtwork} 
-          onClose={() => setSelectedArtwork(null)} 
+        <ArtModal
+          artwork={selectedArtwork}
+          onClose={() => setSelectedArtwork(null)}
+          onUpdate={handleUpdateArtwork}
         />
       )}
 
       {isAddModalOpen && (
-        <AddArtworkModal 
+        <AddArtworkModal
           artists={artists}
           onClose={() => setIsAddModalOpen(false)}
           onSuccess={handleAddSuccess}
@@ -134,8 +140,8 @@ function ArtworksContent() {
       )}
 
       {isExportModalOpen && (
-        <ExportModal 
-          onClose={() => setIsExportModalOpen(false)} 
+        <ExportModal
+          onClose={() => setIsExportModalOpen(false)}
         />
       )}
     </div>

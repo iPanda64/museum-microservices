@@ -3,17 +3,33 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: var(--bg-primary);
 }
 
 .loginCard {
-  padding: 2rem;
+  background: var(--bg-secondary);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 400px;
 }
 
-.loginCard h1 {
-  margin: 0 0 1.5rem;
-  color: #fff;
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-main);
+  font-size: 2rem;
+}
+
+.error {
+  background: var(--status-error-bg);
+  color: var(--status-error-text);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--action-danger);
 }
 
 .form {
@@ -22,50 +38,39 @@
   gap: 1.5rem;
 }
 
-.error {
-  background: #3a1c1e;
-  color: #f5c6cb;
-  padding: .75rem;
-  border-radius: 4px;
-  font-size: .9rem;
-  border: 1px solid #721c24;
-}
-
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .inputGroup label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
   font-weight: 500;
-  color: #aaa;
 }
 
 .inputGroup input {
-  padding: .75rem;
-  border: 1px solid #444;
-  background: #1e1e1e;
-  color: #eee;
+  padding: 0.75rem;
+  border: 1px solid var(--border-main);
+  background: var(--bg-tertiary);
+  color: var(--text-body);
   border-radius: 4px;
   font-size: 1rem;
+  outline: none;
 }
 
 .inputGroup input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+  border-color: var(--action-primary);
+}
+
+.actions {
+  margin-top: 1rem;
 }
 
 .footer {
-  margin-top: 1.5rem;
   text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-subtle);
 }
-
-.footer a {
-  color: #888;
-  text-decoration: none;
-  font-size: .9rem;
-}
-
-.footer a:hover { text-decoration: underline; }

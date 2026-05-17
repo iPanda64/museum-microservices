@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './ArtModal.module.css';
-import { getArtistById, getArtworkById } from '../../services/art';
+import { getArtworkById } from '../../services/art';
+import { getArtistById } from '../../services/artist';
 import { hasRole } from '../../utils/auth';
 import ArtImageCarousel from '../ArtImageCarousel/ArtImageCarousel';
 import ArtDetails from '../ArtDetails/ArtDetails';
 import ArtPhotoManager from '../ArtPhotoManager/ArtPhotoManager';
 
-const ArtModal = ({ artwork, onClose }) => {
+const ArtModal = ({ artwork, onClose, onUpdate }) => {
   const [localArtwork, setLocalArtwork] = useState(artwork);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [artist, setArtist] = useState(null);
@@ -27,12 +28,13 @@ const ArtModal = ({ artwork, onClose }) => {
     const updatedArt = await getArtworkById(artwork.artworkId);
     if (updatedArt) {
       setLocalArtwork(updatedArt);
+      if (onUpdate) onUpdate(updatedArt);
       // If we deleted an image, reset index if it's out of bounds
       if (currentImageIndex >= updatedArt.images.length && updatedArt.images.length > 0) {
         setCurrentImageIndex(updatedArt.images.length - 1);
       }
     }
-  }, [artwork?.artworkId, currentImageIndex]);
+  }, [artwork?.artworkId, currentImageIndex, onUpdate]);
 
   useEffect(() => {
     if (localArtwork?.artistId) {

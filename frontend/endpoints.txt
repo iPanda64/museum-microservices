@@ -307,18 +307,34 @@ Response: 200 OK
 STATISTICS SERVICE (/api/statistics)
 ================================================================================
 
-GET /api/statistics
-Description: Get list of available statistic types.
-Roles: hasRole('ADMIN') || hasRole('MANAGER')
-Response: ["ARTWORKS_BY_TYPE", "ARTISTS_BY_NATIONALITY"]
-
-GET /api/statistics/{type}
-Description: Get statistics data for specified type.
+GET /api/statistics/types
+Description: Statistics grouped by artwork category.
 Roles: hasRole('ADMIN') || hasRole('MANAGER')
 Response:
 {
-  "Painting": 15,
-  "Sculpture": 5
+  "Painting": 24,
+  "Sculpture": 12,
+  "Photography": 8
+}
+
+GET /api/statistics/artists
+Description: Number of artworks registered per artist.
+Roles: hasRole('ADMIN') || hasRole('MANAGER')
+Response:
+{
+  "Vincent van Gogh": 5,
+  "Leonardo da Vinci": 3,
+  "Unknown Artist (ID: 10)": 1
+}
+
+GET /api/statistics/density
+Description: Count of artworks grouped by how many images they have.
+Roles: hasRole('ADMIN') || hasRole('MANAGER')
+Response:
+{
+  "1": 35,
+  "2": 10,
+  "3": 2
 }
 
 

@@ -1,8 +1,9 @@
 :root {
-  /* Surface Colors */
+  /* Surface Colors - ORIGINAL DARK THEME */
   --bg-primary: #121212;
   --bg-secondary: #1e1e1e;
   --bg-tertiary: #2a2a2a;
+  --bg-card: #1e1e1e;
   --bg-overlay: rgba(0, 0, 0, 0.85);
   --bg-glass: rgba(18, 18, 18, 0.7);
   
@@ -11,6 +12,7 @@
   --text-body: #eeeeee;
   --text-muted: #888888;
   --text-subtle: #555555;
+  --text-on-dark: #ffffff;
   
   /* Action & Accent Colors */
   --action-primary: #3b82f6;
@@ -68,3 +70,12 @@ input[type="checkbox"] {
 * {
   box-sizing: border-box;
 }
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { 
+  background: var(--border-main); 
+  border-radius: 10px; 
+}
+::-webkit-scrollbar-thumb:hover { background: var(--action-primary); }

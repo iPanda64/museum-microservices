@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.logo} onClick={() => window.location.href = '/'}>
-        Museum App
+        Museum
       </div>
 
       <div className={styles.navLinks}>

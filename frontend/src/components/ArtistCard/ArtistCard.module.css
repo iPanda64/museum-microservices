@@ -1,0 +1,85 @@
+.card {
+  width: 100%;
+  max-width: 450px;
+  flex: 0 0 350px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.imageContainer {
+  width: 100%;
+  height: 350px;
+  background: var(--bg-tertiary);
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background: var(--bg-tertiary);
+}
+
+.hoverActions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.card:hover .hoverActions {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.deleteBtn {
+  font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+}
+
+.info { padding: 1.5rem 1rem; }
+
+.name {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nationality {
+  margin-top: .5rem;
+  font-size: .9rem;
+  color: var(--text-muted);
+}

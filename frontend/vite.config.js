@@ -22,9 +22,9 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, 'index.html'),
         art: resolve(__dirname, 'art.html'),
+        artists: resolve(__dirname, 'artists.html'),
+        statistics: resolve(__dirname, 'statistics.html'),
         admin: resolve(__dirname, 'admin.html'),
-        employee: resolve(__dirname, 'employee.html'),
-        manager: resolve(__dirname, 'manager.html'),
         login: resolve(__dirname, 'login.html'),
       },
     },
