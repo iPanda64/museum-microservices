@@ -1,0 +1,27 @@
+.input {
+  background: transparent;
+  border: none;
+  color: inherit;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  outline: none;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.editable:hover {
+  background: var(--bg-tertiary);
+  box-shadow: 0 0 0 1px var(--border-light);
+}
+
+.editable:focus {
+  background: var(--bg-tertiary);
+  box-shadow: 0 0 0 1px var(--action-primary);
+}
+
+.readOnly {
+  padding: 2px 4px;
+}

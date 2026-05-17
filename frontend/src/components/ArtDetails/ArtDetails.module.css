@@ -1,0 +1,53 @@
+.details {
+  flex: 1;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+  color: var(--text-body);
+}
+
+.field {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.titleDisplay {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.typeDisplay {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.artist { 
+  color: var(--text-body); 
+  margin-bottom: 1.5rem; 
+  font-size: 1.1rem;
+  padding: 2px 4px;
+}
+
+.saveContainer {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.saveBtn {
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+}
+
+.error {
+  color: var(--status-error-text);
+  font-size: 0.8rem;
+}

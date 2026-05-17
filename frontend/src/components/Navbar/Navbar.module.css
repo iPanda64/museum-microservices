@@ -3,13 +3,25 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #333;
-  color: white;
+  background: var(--bg-primary);
+  color: var(--text-main);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.scrolled {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.7rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .logo {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -20,11 +32,8 @@
 }
 
 .link {
-  color: white;
+  color: var(--text-main);
   text-decoration: none;
-  cursor: pointer;
 }
 
-.link:hover {
-  text-decoration: underline;
-}
+.link:hover { text-decoration: underline; }

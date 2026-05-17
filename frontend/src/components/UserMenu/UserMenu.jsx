@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './UserMenu.module.css';
 import { useAuth } from '../../context/AuthContext';
-import Button from '../Button/Button';
+import GenericButton from '../GenericButton/GenericButton';
 
 const UserMenu = () => {
   const { user, logout } = useAuth();
@@ -19,17 +19,17 @@ const UserMenu = () => {
     return (
       <div className={styles.userSection}>
         <span className={styles.username}>Hello, {user.username}</span>
-        <Button type="logout" onClick={handleLogout}>
+        <GenericButton type="danger" onClick={handleLogout}>
           Logout
-        </Button>
+        </GenericButton>
       </div>
     );
   }
 
   return (
-    <Button type="login" onClick={handleLogin}>
+    <GenericButton type="action" onClick={handleLogin}>
       Login
-    </Button>
+    </GenericButton>
   );
 };
 

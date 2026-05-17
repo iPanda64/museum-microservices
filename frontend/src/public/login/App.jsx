@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import Button from '../../components/Button/Button';
+import GenericButton from '../../components/GenericButton/GenericButton';
 import styles from './Login.module.css';
 
 const App = () => {
@@ -70,9 +70,9 @@ const App = () => {
               />
             </div>
 
-            <Button type="primary" disabled={loading}>
+            <GenericButton type="action" fullWidth={true} disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
-            </Button>
+            </GenericButton>
           </form>
           <div className={styles.footer}>
             <a href="/">← Back to Home</a>

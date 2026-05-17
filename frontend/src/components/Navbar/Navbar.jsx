@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 import UserMenu from '../UserMenu/UserMenu';
 import { useAuth } from '../../context/AuthContext';
@@ -6,9 +6,19 @@ import { hasRole } from '../../utils/auth';
 
 const Navbar = () => {
   const { user } = useAuth();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.logo} onClick={() => window.location.href = '/'}>
         Museum App
       </div>
