@@ -32,7 +32,7 @@ const Navbar = () => {
           <a href="/admin.html" className={styles.link}>Users</a>
         )}
 
-        {(hasRole('ADMIN') || hasRole('MANAGER')) && (
+        {hasRole('MANAGER') && (
           <a href="/statistics.html" className={styles.link}>Statistics</a>
         )}
       </div>

@@ -3,10 +3,12 @@ import Navbar from '../components/Navbar/Navbar';
 import UserList from './components/UserList/UserList';
 import AddUserModal from './components/AddUserModal/AddUserModal';
 import GenericButton from '../components/GenericButton/GenericButton';
-import { AuthProvider } from '../context/AuthContext';
+import { AuthProvider, useAuth } from '../context/AuthContext';
+import { hasRole } from '../utils/auth';
 import styles from './App.module.css';
 
 const AdminContent = () => {
+  const { user, loading: authLoading } = useAuth();
   const [showAddModal, setShowAddModal] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [selectedRole, setSelectedRole] = useState('ALL');
@@ -14,6 +16,21 @@ const AdminContent = () => {
   const handleRefresh = () => {
     setRefreshTrigger(prev => prev + 1);
   };
+
+  if (authLoading) return <div className={styles.loader}>Checking permissions...</div>;
+
+  if (!hasRole('ADMIN')) {
+    return (
+      <div className={styles.adminContainer}>
+        <Navbar />
+        <div className={styles.accessDenied}>
+          <h1>Access Denied</h1>
+          <p>You do not have the necessary permissions to view this page.</p>
+          <GenericButton onClick={() => window.location.href = '/'}>Return Home</GenericButton>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.adminContainer}>

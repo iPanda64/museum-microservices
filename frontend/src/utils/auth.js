@@ -48,14 +48,45 @@ export const getUser = () => {
   };
 };
 
-export const hasRole = (role) => {
+/**
+ * Checks if the user has a specific role.
+ * For Museum Staff (MANAGER, EMPLOYEE), a hierarchy applies.
+ * For ADMIN, it is an isolated role with no access to staff features.
+ */
+export const hasRole = (requiredRole) => {
   const user = getUser();
   if (!user) return false;
 
   const userRole = (user.role || '').replace('ROLE_', '').toUpperCase();
-  const searchRole = role.replace('ROLE_', '').toUpperCase();
+  const targetRole = requiredRole.replace('ROLE_', '').toUpperCase();
 
-  return userRole === searchRole;
+  // Admin is isolated: it only matches itself.
+  if (targetRole === 'ADMIN') {
+    return userRole === 'ADMIN';
+  }
+
+  // Manager/Employee hierarchy (Admin is NOT part of this hierarchy)
+  const STAFF_LEVELS = {
+    'MANAGER': 2,
+    'EMPLOYEE': 1,
+    'USER': 0
+  };
+
+  const userLevel = STAFF_LEVELS[userRole] || 0;
+  const targetLevel = STAFF_LEVELS[targetRole] || 0;
+
+  return userLevel >= targetLevel;
+};
+
+/**
+ * Staff includes MANAGER and EMPLOYEE. 
+ * ADMIN is NOT staff (they are user management only).
+ */
+export const isStaff = () => {
+  const user = getUser();
+  if (!user) return false;
+  const role = user.role.toUpperCase();
+  return role === 'MANAGER' || role === 'EMPLOYEE';
 };
 
 export const isAuthenticated = () => {

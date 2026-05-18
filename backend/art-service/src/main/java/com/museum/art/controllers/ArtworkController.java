@@ -53,7 +53,7 @@ public class ArtworkController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<ArtworkResponseDto> createArtwork(@RequestBody ArtworkRequestDto dto) {
         Artwork domain = artworkControllerMapper.toDomain(dto);
         Artwork created = artworkService.createArtwork(domain);
@@ -61,7 +61,7 @@ public class ArtworkController {
     }
 
     @PutMapping("/{artworkId}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<ArtworkResponseDto> updateArtwork(
             @PathVariable Integer artworkId,
             @RequestBody ArtworkRequestDto dto) {
@@ -71,14 +71,14 @@ public class ArtworkController {
     }
 
     @DeleteMapping("/{artworkId}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<Void> deleteArtwork(@PathVariable Integer artworkId) {
         artworkService.deleteArtwork(artworkId);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{artworkId}/photo")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<String> uploadPhoto(
             @PathVariable Integer artworkId,
             HttpServletRequest request) throws IOException {
@@ -93,7 +93,7 @@ public class ArtworkController {
     }
 
     @DeleteMapping("/{artworkId}/photo/{imageId}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<Void> deletePhoto(@PathVariable Integer artworkId, @PathVariable Integer imageId) {
         artworkService.deleteArtworkImage(artworkId, imageId);
         return ResponseEntity.noContent().build();

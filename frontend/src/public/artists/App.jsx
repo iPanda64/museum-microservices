@@ -7,7 +7,7 @@ import AddArtistModal from '../../components/AddArtistModal/AddArtistModal';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import GenericButton from '../../components/GenericButton/GenericButton';
 import { getArtists } from '../../services/artist';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import styles from './Artists.module.css';
 
 function ArtistsContent() {
@@ -19,7 +19,7 @@ function ArtistsContent() {
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -72,7 +72,7 @@ function ArtistsContent() {
           typeOptions={nationalityOptions}
           selectedType={selectedNationality}
           onTypeChange={setSelectedNationality}
-          actionElement={isStaff && (
+          actionElement={showStaffTools && (
             <GenericButton type="default" onClick={() => setIsAddModalOpen(true)}>
               Add Artist
             </GenericButton>

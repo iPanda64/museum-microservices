@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styles from './ArtistPhotoManager.module.css';
 import GenericButton from '../GenericButton/GenericButton';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import { uploadArtistPhoto, deleteArtistPhoto, getArtistImageUrl } from '../../services/artist';
 
 const ArtistPhotoManager = ({ artistId, photoPath, onUpdate }) => {
@@ -9,7 +9,7 @@ const ArtistPhotoManager = ({ artistId, photoPath, onUpdate }) => {
   const [message, setMessage] = useState({ text: '', type: '' });
   const fileInputRef = useRef(null);
 
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
 
   const handleUpload = async (e) => {
     const file = e.target.files[0];
@@ -62,7 +62,7 @@ const ArtistPhotoManager = ({ artistId, photoPath, onUpdate }) => {
         )}
       </div>
 
-      {isStaff && (
+      {showStaffTools && (
         <div className={styles.staffTools}>
           <div className={styles.actions}>
             <GenericButton 

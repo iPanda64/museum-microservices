@@ -51,7 +51,7 @@ public class ArtistController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<ArtistResponseDto> createArtist(@RequestBody ArtistRequestDto dto) {
         Artist domain = artistControllerMapper.toDomain(dto);
         Artist created = artistService.createArtist(domain);
@@ -59,7 +59,7 @@ public class ArtistController {
     }
 
     @PutMapping("/{artistId}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<ArtistResponseDto> updateArtist(
             @PathVariable Integer artistId,
             @RequestBody ArtistRequestDto dto) {
@@ -69,14 +69,14 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{artistId}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<Void> deleteArtist(@PathVariable Integer artistId) {
         artistService.deleteArtist(artistId);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{artistId}/photo")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<String> uploadPhoto(
             @PathVariable Integer artistId,
             jakarta.servlet.http.HttpServletRequest request) throws java.io.IOException {
@@ -91,7 +91,7 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{artistId}/photo")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<Void> deletePhoto(@PathVariable Integer artistId) {
         artistService.deleteProfilePhoto(artistId);
         return ResponseEntity.noContent().build();

@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './ArtCard.module.css';
 import { getImageUrl, deleteArtwork } from '../../services/art';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import GenericButton from '../GenericButton/GenericButton';
 
 const ArtCard = ({ artwork, onClick, onDelete }) => {
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
   
   const primaryImage = artwork.images && artwork.images.length > 0 
     ? artwork.images[0].imagePath 
@@ -38,7 +38,7 @@ const ArtCard = ({ artwork, onClick, onDelete }) => {
           </div>
         )}
         
-        {isStaff && (
+        {showStaffTools && (
           <div className={styles.hoverActions}>
             <GenericButton 
               type="danger" 

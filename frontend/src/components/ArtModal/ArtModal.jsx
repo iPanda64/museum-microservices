@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styles from './ArtModal.module.css';
 import { getArtworkById } from '../../services/art';
 import { getArtistById } from '../../services/artist';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import ArtImageCarousel from '../ArtImageCarousel/ArtImageCarousel';
 import ArtDetails from '../ArtDetails/ArtDetails';
 import ArtPhotoManager from '../ArtPhotoManager/ArtPhotoManager';
@@ -13,7 +13,7 @@ const ArtModal = ({ artwork, onClose, onUpdate }) => {
   const [artist, setArtist] = useState(null);
   const [loadingArtist, setLoadingArtist] = useState(false);
 
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
 
   // Prevent scroll when modal is open
   useEffect(() => {
@@ -71,7 +71,7 @@ const ArtModal = ({ artwork, onClose, onUpdate }) => {
               artist={artist}
               type={localArtwork.artworkType}
               loadingArtist={loadingArtist}
-              isStaff={isStaff}
+              isStaff={showStaffTools}
               onUpdate={refreshArtwork}
             />
             

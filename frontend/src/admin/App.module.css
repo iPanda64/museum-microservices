@@ -65,3 +65,33 @@
 .roleSelect:focus {
   border-color: var(--action-primary);
 }
+
+.loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-subtle);
+  font-size: 1.2rem;
+  background: var(--bg-primary);
+}
+
+.accessDenied {
+  max-width: 600px;
+  margin: 10rem auto;
+  text-align: center;
+  padding: 3rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+}
+
+.accessDenied h1 {
+  color: var(--status-danger-text);
+  margin-bottom: 1rem;
+}
+
+.accessDenied p {
+  color: var(--text-subtle);
+  margin-bottom: 2rem;
+}

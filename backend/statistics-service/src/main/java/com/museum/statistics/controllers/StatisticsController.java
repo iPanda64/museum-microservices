@@ -20,13 +20,13 @@ public class StatisticsController {
     private final StatisticsService statisticsService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<List<String>> getAvailableStatistics() {
         return ResponseEntity.ok(statisticsService.getAvailableStatistics());
     }
 
     @GetMapping("/{type}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<Map<String, Long>> getStatistics(@PathVariable String type) {
         return ResponseEntity.ok(statisticsService.getStatistics(type));
     }

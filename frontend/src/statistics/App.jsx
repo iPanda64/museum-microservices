@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import { AuthProvider, useAuth } from '../context/AuthContext';
+import { hasRole } from '../utils/auth';
 import BarChart from '../components/BarChart/BarChart';
 import PieChart from '../components/PieChart/PieChart';
+import GenericButton from '../components/GenericButton/GenericButton';
 import { getStatisticsTypes, getStatisticsArtists, getStatisticsDensity } from '../services/statistics';
 import styles from './Statistics.module.css';
 
@@ -15,6 +17,8 @@ function StatisticsContent() {
   const [summary, setSummary] = useState({ totalArt: 0, totalArtists: 0 });
 
   useEffect(() => {
+    if (!hasRole('MANAGER')) return;
+
     const fetchAllStats = async () => {
       setLoading(true);
       const [types, artists, density] = await Promise.all([
@@ -46,8 +50,21 @@ function StatisticsContent() {
     fetchAllStats();
   }, []);
 
-  if (authLoading || loading) {
+  if (authLoading || (hasRole('MANAGER') && loading)) {
     return <div className={styles.loader}>Analyzing museum data...</div>;
+  }
+
+  if (!hasRole('MANAGER')) {
+    return (
+      <div className={styles.container}>
+        <Navbar />
+        <div className={styles.accessDenied}>
+          <h1>Access Denied</h1>
+          <p>You do not have the necessary permissions to view statistics.</p>
+          <GenericButton onClick={() => window.location.href = '/'}>Return Home</GenericButton>
+        </div>
+      </div>
+    );
   }
 
   return (

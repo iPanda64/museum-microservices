@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './ArtistCard.module.css';
 import { getArtistImageUrl, deleteArtistWithArtworks } from '../../services/artist';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import GenericButton from '../GenericButton/GenericButton';
 
 const ArtistCard = ({ artist, onClick, onDelete }) => {
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
 
   const handleDelete = async (e) => {
     e.stopPropagation();
@@ -34,7 +34,7 @@ const ArtistCard = ({ artist, onClick, onDelete }) => {
           </div>
         )}
         
-        {isStaff && (
+        {showStaffTools && (
           <div className={styles.hoverActions}>
             <GenericButton 
               type="danger" 

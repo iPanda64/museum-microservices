@@ -5,7 +5,7 @@ import { hasRole } from '../../utils/auth';
 const AuthorizedInput = ({ 
   value, 
   onChange, 
-  requiredRoles = ['ADMIN', 'MANAGER', 'EMPLOYEE'], 
+  requiredRoles = ['MANAGER', 'EMPLOYEE'], 
   className = '', 
   placeholder = '',
   tag: Tag = 'div',

@@ -55,6 +55,15 @@ export const getTelegramStatus = async (userId) => {
   }
 };
 
+export const unlinkTelegram = async (userId) => {
+  const token = getToken();
+  const response = await fetch(`/api/credentials/telegram/${userId}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return await handleResponse(response);
+};
+
 export const createCredentials = async (credentials) => {
   const token = getToken();
   const response = await fetch('/api/credentials', {

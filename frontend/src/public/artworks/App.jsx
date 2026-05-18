@@ -9,7 +9,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import GenericButton from '../../components/GenericButton/GenericButton';
 import { getArtworks } from '../../services/art';
 import { getArtists } from '../../services/artist';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import styles from './Artworks.module.css';
 
 function ArtworksContent() {
@@ -25,7 +25,7 @@ function ArtworksContent() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,12 +104,12 @@ function ArtworksContent() {
           typeOptions={typeOptions}
           selectedType={selectedType}
           onTypeChange={setSelectedType}
-          actionElement={isStaff && (
+          actionElement={showStaffTools && (
             <GenericButton type="default" onClick={() => setIsAddModalOpen(true)}>
               Add Artwork
             </GenericButton>
           )}
-          secondaryActionElement={isStaff && (
+          secondaryActionElement={showStaffTools && (
             <GenericButton type="default" onClick={() => setIsExportModalOpen(true)}>
               Export
             </GenericButton>

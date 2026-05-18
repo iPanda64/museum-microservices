@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styles from './ArtistModal.module.css';
 import { getArtistById } from '../../services/artist';
 import { getArtworks } from '../../services/art';
-import { hasRole } from '../../utils/auth';
+import { isStaff } from '../../utils/auth';
 import ArtistDetails from '../ArtistDetails/ArtistDetails';
 import ArtistPhotoManager from '../ArtistPhotoManager/ArtistPhotoManager';
 import ArtGrid from '../ArtGrid/ArtGrid';
@@ -12,7 +12,7 @@ const ArtistModal = ({ artist, onClose, onUpdate }) => {
   const [artworks, setArtworks] = useState([]);
   const [loadingArtworks, setLoadingArtworks] = useState(true);
 
-  const isStaff = hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE');
+  const showStaffTools = isStaff();
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -58,7 +58,7 @@ const ArtistModal = ({ artist, onClose, onUpdate }) => {
             
             <ArtistDetails 
               artist={localArtist}
-              isStaff={isStaff}
+              isStaff={showStaffTools}
               onUpdate={refreshArtist}
             />
           </div>

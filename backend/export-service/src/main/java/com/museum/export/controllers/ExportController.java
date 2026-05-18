@@ -22,7 +22,7 @@ public class ExportController {
     private final ArtRetrievalService artRetrievalService;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN') || hasRole('MANAGER') || hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') || hasRole('EMPLOYEE')")
     public ResponseEntity<byte[]> exportArtworks(@RequestBody final ExportRequestDto requestDto) {
         List<Artwork> artworks = artRetrievalService.fetchAllArtworks();
         String format = requestDto.format();

@@ -73,6 +73,17 @@
   border: 1px solid rgba(59, 130, 246, 0.4);
 }
 
+.clickable {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clickable:hover {
+  background: rgba(239, 68, 68, 0.15); /* Red tint on hover to signify removal */
+  color: var(--status-danger-text);
+  border-color: var(--status-danger-text);
+}
+
 .notLinked {
   background: var(--bg-primary);
   color: var(--text-subtle);
