@@ -236,7 +236,6 @@ Response: 204 No Content
 
 GET /api/credentials/telegram/link/{id}
 Description: Get Telegram bot linking URL.
-Roles: hasRole('ADMIN')
 Response:
 {
   "url": "https://t.me/your_bot?start=..."

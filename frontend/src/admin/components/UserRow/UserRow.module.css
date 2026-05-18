@@ -1,0 +1,125 @@
+.row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1.8fr 140px 1.2fr 120px 180px;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s, background 0.2s;
+  gap: 1rem;
+}
+
+.row:hover {
+  background: var(--bg-tertiary);
+  transform: translateX(5px);
+}
+
+.id {
+  color: var(--text-muted);
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.username {
+  font-weight: 600;
+  color: var(--text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.email {
+  color: var(--text-body);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  background: var(--bg-primary);
+  color: var(--text-muted);
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--border-main);
+}
+
+.phone {
+  color: var(--text-body);
+  font-size: 0.9rem;
+}
+
+.telegram {
+  display: flex;
+  justify-content: center;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px; /* Pill shape matches the role tag */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.linked {
+  background: rgba(59, 130, 246, 0.15); /* Subtle Blue tint */
+  color: var(--action-primary);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.notLinked {
+  background: var(--bg-primary);
+  color: var(--text-subtle);
+  border: 1px solid var(--border-main);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.deleting {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.loading {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-light);
+  border-top-color: var(--action-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1100px) {
+  .row {
+    grid-template-columns: 50px 1fr 1.5fr 120px 1fr 100px 150px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .actions {
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
+}

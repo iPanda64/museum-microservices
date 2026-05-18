@@ -12,7 +12,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/credentials/telegram")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 public class TelegramController {
 
     private final TelegramService telegramService;
@@ -24,12 +23,14 @@ public class TelegramController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String, Boolean>> isTelegramLinked(@PathVariable Integer id) {
         boolean linked = telegramService.isTelegramLinked(id);
         return ResponseEntity.ok(Collections.singletonMap("linked", linked));
     }
 
     @GetMapping("/chat-id/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Long> getTelegramChatId(@PathVariable Integer id) {
         try {
             Long chatId = telegramService.getTelegramChatId(id);
@@ -40,6 +41,7 @@ public class TelegramController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> unlinkTelegram(@PathVariable Integer id) {
         telegramService.unlinkTelegram(id);
         return ResponseEntity.noContent().build();
