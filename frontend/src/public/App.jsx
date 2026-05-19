@@ -64,7 +64,7 @@ function AppContent() {
 
         <section className={styles.featuredSection}>
           <div className={styles.sectionHeader}>
-            <h2>Artists</h2>
+            <h2>Featured Artists</h2>
             <GenericButton onClick={() => window.location.href = '/artists.html'}>
               View All Artists
             </GenericButton>
